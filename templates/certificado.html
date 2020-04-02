@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{certificado.pessoa}} - {{certificado.formacao}}</title>
+</head>
+<body>
+    
+    <div id="qrcode"></div>
+    <input type="text" value="{{cod}}" id="cod" hidden>
+    <script src="{{ url_for('static', filename='qrcode.min.js') }}"></script>
+
+    <script>
+
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            width : 100,
+            height : 100
+        });
+
+        window.onload = function makeQRCode(){
+            let cod = document.getElementById("cod").value;
+            let text = `http://192.168.15.9:5000/validar/${cod}`
+            return qrcode.makeCode(text);
+        }
+    </script>
+</body>
+</html>
+
